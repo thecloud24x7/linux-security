@@ -87,7 +87,7 @@
 -w /usr/bin/curl -p x -k audit-wazuh-x:dangerous
 
 # Monitor the use of setuid and setgid programs
--a always,exit -F arch=b64 -F euid=0 -S execve -k audit-wazuh-x:privileged
+-a always,exit -F arch=b64 -S execve -C euid=0 -k audit-wazuh-x:privileged
 
 # Monitor changes to /var/log/wtmp and /var/run/utmp
 -w /var/log/wtmp -p wa -k audit-wazuh-a:session
@@ -108,6 +108,6 @@
 -a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -S chmod -S fchmod -S fchmodat -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -S fsetxattr -k audit-wazuh-a:perm_mod
 
 # Monitor privileged commands execution
--a always,exit -F arch=b64 -S execve -C euid=0 -F key=audit-wazuh-x:exec
+-a always,exit -F arch=b64 -S execve -k audit-wazuh-x:exec
 
 # End of file
